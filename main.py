@@ -1,3 +1,4 @@
+import random
 import pygame
 import os
 
@@ -19,12 +20,25 @@ def texts(txt, x, y, size):  # ingame texts function, default position: middle
 
 current_display = "menu"
 
+
+class Obstacle:
+    def __init__(self, x, width):
+        self.x = x
+        self.width = width
+        self.y_upper = 0
+        self.height_upper = random.randint(150, 250)
+        self.space = 100
+        self.y_lower = self.height_upper + self.space
+        self.height_lower = screen_height - self.y_lower
+        self.color = (3, 252, 132)
+
+
 while True:  # game's main loop
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             quit()
-    if current_display == "menu":
+    if current_display == "menu":  # game's main screen
         texts("Press SPACE to begin", 500, 780, 30)
         game_logo = pygame.image.load(os.path.join("logo1.png"))
         screen.blit(game_logo, (450, 200))
